@@ -1,8 +1,20 @@
 package com.example.sw.entidades;
 
+
+
+import javax.persistence.*;
+
+@Entity (name = "cores")
 public class Cores {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idcores")
     private long id;
+    @Column(name = "cores")
     private String cores;
+
+    public Cores() {
+    }
 
     public Cores(long id, String cores) {
         this.id = id;
