@@ -18,7 +18,7 @@ public class PersonagensService {
         Optional<Personagens> obj = personagensRepository.findById(id);
         return obj.get();
     }
-   public Personagens inserir (Personagens obj){
+   public Personagens registro (Personagens obj){
         return personagensRepository.save(obj);
    }
 }

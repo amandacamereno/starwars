@@ -2,18 +2,23 @@ package Service;
 
 import Repository.FilmeRepository;
 import com.example.sw.entidades.Filme;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class FilmeService {
-    //Autowired
+    @Autowired
     private FilmeRepository filmeRepository;
+
     public List<Filme> findAll() {
         return filmeRepository.findAll();
     }
+
     public Filme findById(Integer id) {
-        Optional<Filme> filme =filmeRepository.findById(id);
+        Optional<Filme> filme = filmeRepository.findById(id);
         return filme.get();
     }
 

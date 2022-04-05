@@ -2,6 +2,7 @@ package com.example.sw.controller;
 
 
 import Service.PersonagensService;
+import com.example.sw.entidades.Filme;
 import com.example.sw.entidades.Personagens;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,10 +34,12 @@ public class PersonagensController {
 
     @PostMapping
     public ResponseEntity<Personagens> inserir (@RequestBody Personagens obj){
-        obj = personagensService.inserir(obj);
+        obj = personagensService.registro(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
+
+
 }
 
 
