@@ -2,7 +2,7 @@ package com.example.sw.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import Service.FilmeService;
+import com.example.sw.Service.FilmeService;
 import com.example.sw.entidades.Filme;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +27,10 @@ public class FilmeController {
         Filme obj = filmeService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
-    @PostMapping( "/{id}")
+    @PostMapping
     public ResponseEntity<Filme> registro(@RequestBody Filme obj){
         obj = filmeService.registro(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(obj);
+        return ResponseEntity.ok().body(obj);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Integer id){

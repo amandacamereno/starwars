@@ -1,16 +1,25 @@
 package com.example.sw.entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
-@Entity (name = "corcabelo")
+@Entity (name = "cor_cabelo")
 public class CorCabelo {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    @Column (name = "idcorcabelo")
+    @Column (name = "idcor_cabelo")
     private long id;
     @Column (name = "corcabelo")
     private String corCabelo;
 
+    @ManyToOne
+    @JoinColumn(name = "cores_idcor")
+    private Cores cores;
+    @ManyToOne
+    @JoinColumn(name = "personagem_idpessoa")
+    @JsonBackReference
+    private Personagens personagensCabelo;
     public CorCabelo() {
     }
 

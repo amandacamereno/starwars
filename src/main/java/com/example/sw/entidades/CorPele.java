@@ -1,8 +1,10 @@
 package com.example.sw.entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
-@Entity (name =  "corpele")
+@Entity (name =  "cor_pele")
 public class CorPele {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
@@ -11,6 +13,13 @@ public class CorPele {
     @Column (name = "corpele")
     private String corpele;
 
+    @ManyToOne
+    @JoinColumn(name = "idcor_pele")
+    private Cores cores;
+    @ManyToOne
+    @JoinColumn(name = "personagem_idpessoa")
+    @JsonBackReference
+    private Personagens personagensPele;
     public CorPele() {
     }
 

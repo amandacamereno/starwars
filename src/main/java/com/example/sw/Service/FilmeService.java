@@ -1,6 +1,6 @@
-package Service;
+package com.example.sw.Service;
 
-import Repository.FilmeRepository;
+import com.example.sw.Repository.FilmeRepository;
 import com.example.sw.entidades.Filme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

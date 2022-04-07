@@ -1,6 +1,10 @@
 package com.example.sw.entidades;
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "personagem")
 public class Personagens  {
@@ -22,9 +26,27 @@ public class Personagens  {
     @Column(name = "edited")
     private String edited;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idespécie")
+    private Especie especie;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idgenero")
+    private Genero genero;
+    @OneToMany(mappedBy = "personagensPele")
+    @JsonManagedReference
+    private List<CorPele> corPeleList;
+    @OneToMany(mappedBy = "personagensCabelo")
+    @JsonManagedReference
+    private List<CorCabelo> corCabeloList;
+    @OneToMany(mappedBy = "personagensOlhos")
+    @JsonManagedReference
+    private List<CorOlhos> corOlhosList;
+
     public Personagens (){};
 
-    public Personagens(Integer id, String nome, Double altura, Double peso, String data_aniversario, String criated, String edited) {
+    public Personagens(Integer id, String nome, Double altura, Double peso, String data_aniversario, String criated,
+                       String edited, Genero genero, Especie especie, List<CorPele> corPeleList,
+                       List<CorCabelo> corCabeloList, List<CorOlhos>corOlhosList) {
         this.id = id;
         this.nome = nome;
         this.altura = altura;
@@ -32,6 +54,11 @@ public class Personagens  {
         this.data_aniversario = data_aniversario;
         this.criated = criated;
         this.edited = edited;
+        this.genero = genero;
+        this.especie = especie;
+        this.corPeleList = corPeleList;
+        this.corCabeloList = corCabeloList;
+        this.corOlhosList = corOlhosList;
 
     }
 
@@ -87,4 +114,23 @@ public class Personagens  {
         this.edited = edited;
     }
 
+    public Especie getEspecie() {return especie;}
+
+    public void setEspecie(Especie especie) {this.especie = especie;}
+
+    public Genero getGenero() {return genero;}
+
+    public void setGenero(Genero genero) {this.genero = genero;}
+
+    public List<CorPele> getCorPeleList() {return corPeleList;}
+
+    public void setCorPeleList(List<CorPele> corPeleList) {this.corPeleList = corPeleList;}
+
+    public List<CorCabelo> getCorCabeloList() {return corCabeloList;}
+
+    public void setCorCabeloList(List<CorCabelo> corCabeloList) {this.corCabeloList = corCabeloList;}
+
+    public List<CorOlhos> getCorOlhosList() {return corOlhosList;}
+
+    public void setCorOlhosList(List<CorOlhos> corOlhosList) {this.corOlhosList = corOlhosList;}
 }

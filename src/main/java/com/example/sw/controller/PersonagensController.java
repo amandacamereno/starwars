@@ -1,29 +1,26 @@
 package com.example.sw.controller;
 
 
-import Service.PersonagensService;
-import com.example.sw.entidades.Filme;
+import com.example.sw.Service.PersonagensService;
 import com.example.sw.entidades.Personagens;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
+import java.util.List;
 
 
 @RestController
 @RequestMapping(value= "/personagens")
 public class PersonagensController {
 
-    //@Autowired
+    @Autowired
     private PersonagensService personagensService;
 
 
     @GetMapping
-    public ResponseEntity<Personagens> findAll() {
-        Personagens teste1 = new Personagens(null, "Luke", 1.72, 60.0,
-                "XXXX", "31/03/2022", "ainda nao");
-        return ResponseEntity.ok().body(teste1);
+    public ResponseEntity<List<Personagens>> findAll() {
+        List<Personagens> list = personagensService.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
@@ -33,13 +30,24 @@ public class PersonagensController {
     }
 
     @PostMapping
-    public ResponseEntity<Personagens> inserir (@RequestBody Personagens obj){
+    public ResponseEntity<Personagens> inserir(@RequestBody Personagens obj) {
         obj = personagensService.registro(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-        return ResponseEntity.created(uri).body(obj);
+        //URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.ok(obj);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        personagensService.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Personagens> atualizar(@PathVariable Integer id, @RequestBody Personagens obj) {
+        obj = personagensService.atualizar(id, obj);
+        return ResponseEntity.ok().body(obj);
+
+    }
 }
 
 

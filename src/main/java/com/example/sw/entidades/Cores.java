@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Cores {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idcores")
+    @Column(name = "idcor")
     private long id;
     @Column(name = "cores")
     private String cores;
